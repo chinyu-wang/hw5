@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2016–2025 臺灣、越南、泰國入境旅客趨勢｜Highcharts</title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<style>
+:root{color-scheme:light;--ink:#172d3d;--muted:#607480;--line:#dfebe9;--surface:#fff;--background:#f5f8f7}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--background);color:var(--ink)}
+.shell{max-width:1140px;margin:36px auto;padding:0 20px}.eyebrow{color:#3c7e79;font-weight:700;font-size:12px;letter-spacing:.13em;text-transform:uppercase}
+h1{font-size:clamp(24px,3.4vw,36px);margin:10px 0 8px;letter-spacing:.02em}.subtitle{color:var(--muted);margin:0 0 22px;line-height:1.8}
+.chart-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 18px 12px;box-shadow:0 10px 32px rgba(16,45,40,.05)}
+#container{height:480px;min-width:0}.footnotes{padding:15px 12px 8px;border-top:1px solid var(--line);font-size:13px;color:#526871;line-height:1.9}
+.footnotes p{margin:4px 0}.footnotes a{color:#216c8b}.data-status{font-weight:700;color:#89551b}
+@media(max-width:600px){.shell{margin:20px auto;padding:0 12px}.chart-panel{padding:10px 8px}#container{height:410px}.footnotes{padding:12px 8px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<div class="eyebrow">Tourism Statistics · 2016–2025</div>
+<h1>臺灣、越南、泰國入境旅客趨勢</h1>
+<p class="subtitle">International Visitor Arrivals ／ 年度資料 ／ 單位：人次。移動滑鼠至折線上，可比較同一年三地的入境旅客數。</p>
+<section class="chart-panel" aria-label="2016 至 2025 年臺灣、越南、泰國入境旅客折線圖">
+<div id="container"></div>
+<div class="footnotes">
+<p><strong>資料來源：</strong><a href="https://stat.taiwan.net.tw/statistics?action=year" target="_blank" rel="noopener">臺灣交通部觀光署</a>、<a href="https://vietnamtourism.gov.vn/en/statistic/international" target="_blank" rel="noopener">越南觀光主管機關</a>、<a href="https://secretary.mots.go.th/tourism-stat" target="_blank" rel="noopener">泰國觀光暨體育部（MOTS）</a>。圖中使用所附 Excel「年度Inbound資料」的數值，未自行推算或修改。</p>
+<p class="data-status">資料註記：Excel 的「來源與註記」工作表將越南 2020、2021 年列為待確認，但「年度Inbound資料」已有 3,837,300 與 157,300；本圖依主工作表呈現。另泰國 2019 為修訂數（R），2020–2025 為官方暫定數（P）；越南部分年份仍註記待直接複核。</p>
+<p>不同國家的官方統計口徑可能不完全一致。匯出圖表或資料，可使用圖表右上角選單。圖表顯示需要網路載入 Highcharts 函式庫；資料已直接寫入本 HTML，不需要額外 Excel、CSS 或 JS 檔案。</p>
+</div>
+</section>
+</main>
+<script>
+const years = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+const visitorSeries = [{"name": "臺灣", "color": "#237b9d", "data": [10690279, 10739601, 11066707, 11864105, 1377861, 140479, 895962, 6486951, 7857686, 8574547]}, {"name": "越南", "color": "#da8c3b", "data": [10012735, 12922151, 15497791, 18008591, 3837300, 157300, 3661222, 12602434, 17583901, 21168291]}, {"name": "泰國", "color": "#437e62", "data": [32529588, 35591978, 38178194, 39916251, 6702396, 427869, 11065226, 28150016, 35545714, 32974321]}];
+Highcharts.setOptions({lang:{contextButtonTitle:'圖表選單',downloadPNG:'下載 PNG 圖片',downloadJPEG:'下載 JPEG 圖片',downloadPDF:'下載 PDF',downloadSVG:'下載 SVG',downloadCSV:'下載 CSV',downloadXLS:'下載 XLS',viewData:'檢視資料表',hideData:'隱藏資料表',printChart:'列印圖表',viewFullscreen:'全螢幕檢視',exitFullscreen:'結束全螢幕',numericSymbols:['千','百萬','十億']}});
+Highcharts.chart('container', {
+ chart:{type:'line',backgroundColor:'transparent',plotBorderColor:'#e0e9e8',plotBorderWidth:1,plotBorderRadius:5,spacingTop:30,spacingBottom:10},
+ title:{text:'International Visitor Arrivals（2016–2025）',align:'left',style:{fontSize:'17px',fontWeight:'600',color:'#172d3d'}},
+ subtitle:{text:'Taiwan · Vietnam · Thailand',align:'left',style:{color:'#6c8088'}},
+ credits:{enabled:false},
+ xAxis:{categories:years.map(String),crosshair:{width:1,color:'#a4b9b5',dashStyle:'ShortDash'},title:{text:'年度'},lineWidth:0,tickLength:6,tickColor:'#e6e6e6'},
+ yAxis:{min:0,title:{text:'入境旅客人次'},labels:{formatter:function(){return Highcharts.numberFormat(this.value/1000000,0)+' 百萬';}},gridLineColor:'#e8efee'},
+ legend:{enabled:true,align:'center',verticalAlign:'bottom',itemStyle:{fontWeight:'500'}},
+ tooltip:{shared:true,useHTML:true,backgroundColor:'#fff',borderColor:'#dce8e5',shadow:true,
+ formatter:function(){let s='<div style="min-width:205px"><div style="font-weight:700;font-size:14px;padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid #e2ebe9">'+years[this.points[0].point.index]+' 年</div>';this.points.forEach(p=>{s+='<div style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin:5px 0"><span><span style="color:'+p.color+'">●</span> '+p.series.name+'</span><strong>'+Highcharts.numberFormat(p.y,0,'.',',')+'</strong></div>'});return s+'</div>';}},
+ plotOptions:{series:{lineWidth:3,marker:{enabled:false,symbol:'circle',radius:4,states:{hover:{enabled:true,radius:6}}},states:{hover:{lineWidthPlus:1}},label:{enabled:false}}},
+ accessibility:{description:'顯示2016年至2025年，臺灣、越南、泰國年度入境旅客人次的比較折線圖'},
+ exporting:{enabled:true,filename:'International_Visitor_Arrivals_2016_2025'},
+ series:visitorSeries
+});
+</script>
+</body>
+</html>
