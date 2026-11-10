@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><meta name="description" content="2025年10月至2026年9月來臺旅客來源地區統計：以互動式Highcharts圓餅圖與深度分析觀察旅客結構。">
+<title>從亞洲出發，世界抵臺｜2025–2026 來臺旅客來源地區觀察</title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<style>
+
+:root{color-scheme:light;--bg:#f7f9fc;--panel:#ffffff;--panel2:#f3f7fa;--ink:#1b2c3e;--sub:#65768a;--line:#dbe4ed;--accent:#176aa3;--gold:#a66c1d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;line-height:1.85}body:before{content:"";position:absolute;left:0;top:0;width:100%;height:550px;z-index:-1;background:linear-gradient(155deg,#eaf4fa 0%,#f7f9fc 72%)}.wrap{width:min(1080px,calc(100% - 40px));margin:auto}header{padding:67px 0 26px}.eyebrow{font-size:11px;letter-spacing:.24em;font-weight:750;color:var(--accent)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(32px,5vw,57px);line-height:1.35;letter-spacing:-.03em;margin:18px 0 19px;font-weight:800}h1 em{font-style:normal;color:var(--accent)}.intro{color:#53677c;font-size:17px;max-width:815px}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}.chip{border:1px solid #d6e4ef;border-radius:30px;padding:5px 13px;font-size:12px;color:#4e667b;background:#fff}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:29px 0 33px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:23px 24px;box-shadow:0 5px 22px rgba(33,66,99,.045)}.stat .k{font-size:12px;color:var(--sub);letter-spacing:.04em}.stat .v{font-size:clamp(22px,3vw,35px);font-weight:800;line-height:1.35;color:#1d527a;margin:8px 0 3px;font-variant-numeric:tabular-nums}.stat .d{color:#6a7e91;font-size:12px}.section-label{color:var(--accent);font-size:11px;letter-spacing:.17em;font-weight:750;margin:23px 0 9px}.section-title{font-size:clamp(24px,3vw,33px);line-height:1.4;margin:0 0 13px;color:#21364c}.section-note{font-size:14px;color:var(--sub);margin-bottom:20px}.chart-card{border:1px solid var(--line);border-radius:14px;background:#fff;padding:24px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(245px,.9fr);gap:24px;align-items:center;box-shadow:0 6px 24px rgba(42,72,96,.045)}.chart-frame{min-width:0}#pieChart{height:420px;width:100%}.legend-title{font-size:12px;letter-spacing:.1em;color:var(--sub);margin:0 0 12px}.legend-row{border-bottom:1px solid #e7edf3;padding:11px 0;display:grid;grid-template-columns:minmax(0,1fr) 75px;gap:4px 12px;align-items:baseline;font-variant-numeric:tabular-nums}.legend-row span{display:flex;align-items:center;font-size:14px}.legend-row i{width:10px;height:10px;border-radius:50%;margin-right:10px;flex:none}.legend-row strong{text-align:right;font-size:18px;color:#243e55}.legend-row small{grid-column:1/-1;color:var(--sub);padding-left:20px;font-size:11px}.chart-foot{margin-top:12px;font-size:12px;color:var(--sub)}.trend{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:27px;box-shadow:0 6px 24px rgba(42,72,96,.04)}.trend h3{margin-bottom:5px;font-size:19px}.trend>p{color:var(--sub);font-size:13px}.months{display:grid;grid-template-columns:1fr 1fr;gap:10px 35px;margin-top:19px}.month-line{display:grid;grid-template-columns:78px minmax(0,1fr) 80px;align-items:center;gap:9px;font-size:11px;font-variant-numeric:tabular-nums;color:#566a7e}.month-line b{text-align:right;font-size:11px;font-weight:650;color:#2f4860}.bartrack{height:9px;background:#e7edf3;border-radius:10px;overflow:hidden}.bar{height:100%;border-radius:10px;background:linear-gradient(90deg,#73b1d5,#176aa3)}.report{padding:74px 0 75px}.actions{display:flex;gap:9px;margin:24px 0 18px}.actions button{cursor:pointer;border:1px solid #cadae7;background:#fff;color:#315673;padding:9px 17px;border-radius:25px;font:inherit;font-size:12px}.actions button:hover{border-color:var(--accent);color:var(--accent);background:#f0f8ff}details{border-top:1px solid #d9e3ec}details:last-of-type{border-bottom:1px solid #d9e3ec}summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:45px minmax(0,1fr) 24px;gap:15px;align-items:center;padding:23px 6px}summary::-webkit-details-marker{display:none}summary .no{color:var(--accent);font-weight:750;font-size:15px}summary .topic{font-size:18px;font-weight:700;color:#243c53}summary .hint{display:block;font-size:12px;font-weight:400;color:var(--sub);margin-top:3px}summary .plus{font-size:24px;color:var(--accent);text-align:right}details[open] summary .plus{transform:rotate(45deg)}.prose{padding:0 33px 25px 66px;color:#41586e;font-size:15px;line-height:2}.prose p{margin-bottom:15px}.prose strong{color:#1b628f;font-weight:750}.quote{margin:22px 0;border-left:3px solid var(--accent);padding:12px 20px;background:#edf5fb;color:#315672;border-radius:0 7px 7px 0}.source{border-top:1px solid var(--line);padding:28px 0 45px;font-size:12px;color:#718397}.source a{color:#176aa3}.source p{margin:6px 0}.footnote{margin-top:15px;color:#8193a3;font-size:12px}@media(max-width:760px){header{padding-top:46px}.stats{grid-template-columns:1fr;gap:9px}.stat{padding:15px 19px}.chart-card{grid-template-columns:1fr;padding:15px}.months{grid-template-columns:1fr}.trend{padding:19px}#pieChart{height:370px}.prose{padding:0 5px 20px 45px}summary{gap:8px;grid-template-columns:32px minmax(0,1fr) 20px}summary .topic{font-size:16px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="eyebrow">TOURISM DATA STORY · OCT 2025 — SEP 2026</div>
+<h1>從亞洲出發，<em>世界抵臺</em><br>來臺旅客來源地區觀察</h1>
+<p class="intro">誰構成了來臺旅客的主要來源？透過 2025 年 10 月至 2026 年 9 月的入境人次，從一張圓餅圖看見臺灣國際觀光市場的來源結構，以及數字背後值得追問的問題。</p>
+<div class="meta"><span class="chip">統計期間｜2025.10—2026.09</span><span class="chip">統計單位｜人次</span><span class="chip">來源區分｜六大地區</span></div>
+</header>
+<section class="stats" aria-label="重要指標">
+<div class="stat"><div class="k">期間入境旅客總人次</div><div class="v">6,900,434</div><div class="d">共 12 個月份</div></div>
+<div class="stat"><div class="k">最大客源地區｜亞洲</div><div class="v">76.52%</div><div class="d">5,280,306 人次</div></div>
+<div class="stat"><div class="k">前三大來源地區合計</div><div class="v">97.51%</div><div class="d">亞洲＋美洲＋歐洲</div></div>
+</section>
+<section aria-label="圓餅圖">
+<div class="section-label">01 / THE BIG PICTURE</div>
+<h2 class="section-title">一張圓餅圖，看見來臺旅客的地區結構</h2>
+<p class="section-note">滑鼠移至扇形可查看確切人次與占比；點選圖例可暫時隱藏或顯示地區；圖表右上角選單可匯出圖片或資料。各區域占比以全期間總人次為分母。</p>
+<div class="chart-card"><div class="chart-frame"><div id="pieChart" role="img" aria-label="2025年10月至2026年9月來臺旅客按地區人次比例圓餅圖"></div></div><aside><div class="legend-title">SOURCE REGIONS · 按人次排序</div>
+<div class="legend-row"><span><i style="background:#2385b4"></i>亞洲地區</span><strong>76.52%</strong><small>5,280,306 人次</small></div>
+<div class="legend-row"><span><i style="background:#e7ad4d"></i>美洲地區</span><strong>13.90%</strong><small>959,459 人次</small></div>
+<div class="legend-row"><span><i style="background:#798ecf"></i>歐洲地區</span><strong>7.09%</strong><small>489,079 人次</small></div>
+<div class="legend-row"><span><i style="background:#a181b6"></i>大洋洲地區</span><strong>2.27%</strong><small>156,637 人次</small></div>
+<div class="legend-row"><span><i style="background:#db8a7a"></i>非洲地區</span><strong>0.21%</strong><small>14,165 人次</small></div>
+<div class="legend-row"><span><i style="background:#96a6b0"></i>其他未列明</span><strong>0.01%</strong><small>788 人次</small></div>
+</aside></div>
+<p class="chart-foot">資料來源：使用者提供之 Excel《來臺旅客按國籍統計》，114/10—115/9（已換算為西元 2025/10—2026/09）。圖表數值以 12 個月份累計；占比四捨五入至小數點後兩位。</p>
+</section>
+<section class="trend">
+<div class="section-label">02 / MONTHLY CONTEXT</div><h3>十二個月的入境人次輪廓</h3>
+<p>圓餅圖呈現全期間「來源組成」，下列月別人次則補充觀察整體入境規模的波動。長條長度相對於期間最高月份，不代表各月的地區占比。</p>
+<div class="months"><div class="month-line"><span>2025-10</span><div class="bartrack"><div class="bar" style="width:80.36%"></div></div><b>606,889</b></div>
+<div class="month-line"><span>2025-11</span><div class="bartrack"><div class="bar" style="width:89.04%"></div></div><b>672,383</b></div>
+<div class="month-line"><span>2025-12</span><div class="bartrack"><div class="bar" style="width:100.00%"></div></div><b>755,174</b></div>
+<div class="month-line"><span>2026-01</span><div class="bartrack"><div class="bar" style="width:79.95%"></div></div><b>603,786</b></div>
+<div class="month-line"><span>2026-02</span><div class="bartrack"><div class="bar" style="width:64.47%"></div></div><b>486,895</b></div>
+<div class="month-line"><span>2026-03</span><div class="bartrack"><div class="bar" style="width:98.87%"></div></div><b>746,627</b></div>
+<div class="month-line"><span>2026-04</span><div class="bartrack"><div class="bar" style="width:79.84%"></div></div><b>602,934</b></div>
+<div class="month-line"><span>2026-05</span><div class="bartrack"><div class="bar" style="width:72.92%"></div></div><b>550,689</b></div>
+<div class="month-line"><span>2026-06</span><div class="bartrack"><div class="bar" style="width:63.39%"></div></div><b>478,701</b></div>
+<div class="month-line"><span>2026-07</span><div class="bartrack"><div class="bar" style="width:57.70%"></div></div><b>435,729</b></div>
+<div class="month-line"><span>2026-08</span><div class="bartrack"><div class="bar" style="width:61.80%"></div></div><b>466,729</b></div>
+<div class="month-line"><span>2026-09</span><div class="bartrack"><div class="bar" style="width:65.40%"></div></div><b>493,898</b></div></div>
+</section>
+<section class="report">
+<div class="section-label">IN-DEPTH REPORT</div>
+<h2 class="section-title">讀懂來臺客源：五個面向的數據觀察</h2>
+<p class="section-note">選擇想閱讀的議題展開，也可以一次展開全部分析。</p>
+<div class="actions"><button type="button" onclick="setAll(true)">全部展開</button><button type="button" onclick="setAll(false)">全部收合</button></div>
+<details open><summary><span class="no">01</span><span class="topic">全局觀察：亞洲主導的入境結構<span class="hint">將六個地區放在同一張圖上</span></span><span class="plus">+</span></summary><div class="prose"><p>2025 年 10 月至 2026 年 9 月，來臺旅客累計 <strong>6,900,434 人次</strong>。其中，亞洲地區達 <strong>5,280,306 人次，占 76.52%</strong>，明顯領先其他地區。換句話說，每 100 人次來臺旅客中，約有 77 人次來自亞洲。</p><p>這種結構顯示亞洲是臺灣入境觀光最主要的來源市場。然而，圓餅圖能回答的是「客源分布在哪些地區」，無法單憑這一結果判定旅客選擇臺灣的原因。</p><div class="quote">規模上的優勢非常清楚；真正值得深入的是：亞洲內部各個國籍市場的組成是否同樣集中？</div></div></details>
+<details><summary><span class="no">02</span><span class="topic">第二梯隊：美洲與歐洲的市場位置<span class="hint">占比不等於市場價值</span></span><span class="plus">+</span></summary><div class="prose"><p>美洲地區以 <strong>959,459 人次、13.90%</strong> 位居第二，歐洲地區則有 <strong>489,079 人次、7.09%</strong>。兩者合計達 1,448,538 人次，占總量約 21%，為亞洲之外的重要來臺客源。</p><p>這些數據可以用來辨識來源市場規模，但尚不足以比較不同地區旅客的停留時間、平均消費或帶動的觀光收入。若要評估市場的經濟貢獻，仍需交叉參照消費與旅遊行為統計。</p></div></details>
+<details><summary><span class="no">03</span><span class="topic">小眾市場：大洋洲、非洲與未列明<span class="hint">小占比仍值得精確呈現</span></span><span class="plus">+</span></summary><div class="prose"><p>大洋洲地區累計 <strong>156,637 人次，占 2.27%</strong>；非洲地區為 <strong>14,165 人次，占 0.21%</strong>；其他未列明則為 <strong>788 人次，占約 0.01%</strong>。由於占比差距明顯，這幾個類別在圓餅圖中呈現為較細的扇形。</p><p>視覺上較小，不代表可以忽略。特別是「其他未列明」屬於資料分類，不應自行視為某一國家或特定地區。圖表保留所有類別，避免因合併而失去原始資料的完整性。</p></div></details>
+<details><summary><span class="no">04</span><span class="topic">月別變化：高峰與低點落在哪裡？<span class="hint">總量起伏與來源結構是兩件事</span></span><span class="plus">+</span></summary><div class="prose"><p>十二個月中，<strong>2025 年 12 月達 755,174 人次</strong>，為期間最高月份；<strong>2026 年 7 月為 435,729 人次</strong>，是期間低點。兩個月份相差 <strong>319,445 人次</strong>，顯示入境規模有相當程度的月別波動。</p><p>不過，單憑這十二個月份的總人次，仍不能將高低起伏直接歸因於節慶、航班、假期或特定事件；要確認這些因素，還需要對照多年度的同期變化、航空運能與各來源市場的月別資料。</p></div></details>
+<details><summary><span class="no">05</span><span class="topic">下一步：客源集中度帶來什麼思考？<span class="hint">數據揭露了什麼，還沒說明什麼？</span></span><span class="plus">+</span></summary><div class="prose"><p>亞洲、美洲與歐洲合計占 <strong>97.51%</strong>，反映來臺旅客來源集中於少數幾個大地區；其中又以亞洲最為突出。對觀光目的地而言，這有助於掌握主要需求來源，也提醒我們必須關注核心市場變動可能帶來的影響。</p><p>但<strong>地區集中不一定等於國籍集中</strong>。亞洲本身包含許多不同國籍市場，若要分析臺灣觀光客源的多元化程度，下一步應取得國籍細項，並進一步比較各國旅客的成長、停留天數、旅遊目的與消費特性。</p><div class="quote">這張圓餅圖，是理解客源結構的起點，而不是對市場競爭力、觀光收益或旅客偏好的最終答案。</div></div></details>
+</section>
+<footer class="source"><p><strong>資料說明｜</strong>本頁採用提供的《來臺旅客按國籍統計》Excel，彙整 2025 年 10 月至 2026 年 9 月每月的六個來源地區。民國 114 年、115 年已分別轉為西元 2025 年、2026 年。</p><p><strong>分類說明｜</strong>原始欄位為亞洲、非洲、美洲、大洋洲、歐洲與其他未列明，並非個別國籍資料；「人次」不等於不重複旅客人數，亦不等於觀光收益。</p><p><strong>技術說明｜</strong>HTML、CSS、JavaScript 與圖表數據均整合在同一檔案；互動圖表使用 <a href="https://www.highcharts.com/" target="_blank" rel="noopener">Highcharts</a>，首次開啟時需連線載入其程式庫。</p><p>TOURISM DATA STORY · 2025—2026</p></footer>
+</div>
+<script>
+const chartData=[{"name": "亞洲地區", "y": 5280306, "color": "#2385b4"}, {"name": "美洲地區", "y": 959459, "color": "#e7ad4d"}, {"name": "歐洲地區", "y": 489079, "color": "#798ecf"}, {"name": "大洋洲地區", "y": 156637, "color": "#a181b6"}, {"name": "非洲地區", "y": 14165, "color": "#db8a7a"}, {"name": "其他未列明", "y": 788, "color": "#96a6b0"}];
+const total=6900434;
+function setAll(open){document.querySelectorAll('details').forEach(d=>d.open=open)}
+if(typeof Highcharts==='undefined'){
+ document.getElementById('pieChart').innerHTML='<p style="color:#9a5b12;padding:30px;text-align:center">圖表程式庫尚未載入。請確認網路連線後重新整理本頁。右側仍可查看完整統計。</p>';
+}else{
+ Highcharts.setOptions({lang:{thousandsSep:',',decimalPoint:'.',viewFullscreen:'全螢幕檢視',printChart:'列印圖表',downloadPNG:'下載 PNG 圖片',downloadJPEG:'下載 JPEG 圖片',downloadPDF:'下載 PDF',downloadSVG:'下載 SVG',downloadCSV:'下載 CSV',downloadXLS:'下載 Excel',viewData:'查看資料表'}});
+ Highcharts.chart('pieChart',{
+ chart:{type:'pie',backgroundColor:'#ffffff',height:420,spacing:[20,5,20,5],style:{fontFamily:'-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif'}},
+ title:{text:'',style:{color:'#21364c'}},credits:{enabled:false},
+ accessibility:{point:{valueSuffix:' 人次'}},
+ tooltip:{useHTML:true,backgroundColor:'#ffffff',borderColor:'#d5e2ec',style:{color:'#233a50'},formatter:function(){return '<span style="color:'+this.point.color+'">●</span> <b>'+this.point.name+'</b><br>人次：<b>'+Highcharts.numberFormat(this.y,0)+'</b><br>全期間占比：<b>'+Highcharts.numberFormat(this.y/total*100,2)+'%</b>';}},
+ plotOptions:{pie:{size:'88%',center:['50%','50%'],borderWidth:2,borderColor:'#ffffff',showInLegend:false,allowPointSelect:true,cursor:'pointer',states:{hover:{brightness:.09}},dataLabels:[{enabled:true,distance:13,softConnector:true,connectorColor:'#8fa7b9',style:{color:'#334e62',fontSize:'12px',textOutline:'none',fontWeight:'500'},formatter:function(){return this.y/total*100>=3?this.point.name+' '+Highcharts.numberFormat(this.y/total*100,1)+'%':null}},{enabled:true,distance:-42,style:{color:'#ffffff',fontSize:'16px',fontWeight:'800',textOutline:'none'},formatter:function(){return this.y/total*100>=14?Highcharts.numberFormat(this.y/total*100,1)+'%':null}}]}},
+ exporting:{enabled:true,buttons:{contextButton:{theme:{fill:'transparent',stroke:'#aec0cf',r:6},symbolStroke:'#54758c'}}},
+ series:[{name:'來臺旅客',colorByPoint:true,data:chartData}]
+ });
+}
+</script>
+</body></html>
